@@ -1,0 +1,737 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iComfortmaster - Air Conditioning Services</title>
+    <style>
+/* Snowflake Effect */
+#snowflake-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: white;
+    font-size: 1em;
+    opacity: 0.8;
+    user-select: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+  body {
+            opacity: 0; /* Start hidden */
+            transition: opacity 0.5s ease; /* Transition effect */
+        }
+
+        body.loaded {
+            opacity: 1; /* Fully visible */
+        }
+
+header {
+    background-color: #003366;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+a {
+        text-decoration: none; /* Remove underline */
+        color: #ffffff; /* Default color (inherited from parent) */
+    }
+
+    a:hover {
+        color: orange; /* Change color on hover */
+    }
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 60px;
+    margin-right: 15px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+}
+
+header nav ul li {
+    margin: 0 15px;
+    position: relative;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+/* Dropdown Menu */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #003366;
+    color: #f4f4f4;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown-content li {
+    padding: 12px 16px;
+    text-align: left;
+}
+
+.dropdown-content li a {
+    color: #f4f4f4;
+    text-decoration: none;
+}
+
+.dropdown-content li:hover {
+    background-color: orange;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.hero {
+    background: url('ac-background.jpg') no-repeat center center/cover;
+    color: white;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero h2 {
+    font-size: 40px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.cta-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #0099cc;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.cta-button:hover {
+    background-color: #0077aa;
+}
+
+section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+#services .service-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#services .service-item {
+    width: 200px;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Gallery Section */
+#gallery {
+    padding: 60px 20px;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+#gallery h2 {
+    margin-bottom: 30px;
+}
+
+.gallery-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery-container {
+    display: flex;
+    width: 80%;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.gallery-item {
+    flex: 0 0 250px;
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.gallery-item {
+    flex: 0 0 250px; /* Adjust size as needed */
+    margin: 10px;
+    overflow: hidden; /* Ensure the zoom effect stays within the item */
+    position: relative; /* For absolute positioning of the img */
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    transition: transform 0.3s ease; /* Smooth transition for zoom */
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1); /* Zoom effect */
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.8); /* Black with transparency */
+    justify-content: center;
+    align-items: center;
+    animation: pop 0.3s ease-in-out; /* Add pop animation */
+}
+
+.modal-content {
+    max-width: 90%; /* Responsive width */
+    max-height: 90%; /* Responsive height */
+    transform: scale(1); /* Initial scale */
+    transition: transform 0.3s ease; /* Smooth scaling */
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0); /* Start from scaled down */
+    }
+    100% {
+        transform: scale(1); /* End at normal size */
+    }
+}
+
+
+/* Navigation Buttons */
+.nav-button {
+    position: absolute;
+    top: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.nav-button.left {
+    left: 5%;
+}
+
+.nav-button.right {
+    right: 5%;
+}
+
+.nav-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Hide scrollbar */
+.gallery-container::-webkit-scrollbar {
+    display: none;
+}
+
+.video-container video {
+    width: 70%; /* Set to 80% of the parent container */
+    max-width: 640px; /* Limit max width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Contact Form Styles */
+#contact {
+    background-color: transparent;
+    padding: 40px;
+    text-align: center;
+}
+
+#contact h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #003366;
+}
+
+#contact p,
+#contact ul,
+#contact ul li {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+#contact .follow-us {
+    margin: 20px 0;
+}
+
+#contact .follow-us a img {
+    width: 40px;
+    height: 40px;
+    margin: 0 10px;
+    transition: transform 0.2s;
+}
+
+#contact .follow-us a img:hover {
+    transform: scale(1.1);
+}
+
+/* Contact Form Fields */
+#contact-form {
+    max-width: 500px;
+    margin: 20px auto;
+    background-color: #003366;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#contact-form label {
+    font-size: 14px;
+    color: white;
+    display: block;
+    margin-bottom: 5px;
+}
+
+#contact-form input[type="text"],
+#contact-form input[type="email"],
+#contact-form input[type="tel"],
+#contact-form input[type="address"],
+#contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    color: #333;
+}
+
+#contact-form textarea {
+    resize: vertical;
+}
+
+#contact-form button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    color: white;
+    background-color: #003366;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#contact-form button:hover {
+    background-color: orange;
+}
+
+
+footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.follow-us img {
+    width: 40px; /* Adjust the size as needed */
+    height: 40px; /* Keep it proportional */
+    margin: 0 10px; /* Space between icons */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-image: url('background.jpg'); /* Update with your image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#video-section {
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+        }
+
+        video {
+            max-width: 110%;
+            height: 90%;
+        }
+</style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="iComfortmaster Logo" class="logo">
+            <h1>i<i>ComfortMaster</i></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li class="dropdown">
+                    <a href="#services">Services</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#installation">Installation</a></li>
+                        <li><a href="#diagnosis">Diagnosis & Troubleshooting</a></li>
+                        <li><a href="#maintenance">Preventive Maintenance</a></li>
+                        <li><a href="#ductworks">Duct Works</a></li>
+                    </ul>
+                </li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<script>
+        // Fade in effect when the page loads
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+
+        // Optional fade out effect before navigating away
+        window.addEventListener('beforeunload', function() {
+            document.body.classList.remove('loaded');
+        });
+    </script>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h2>Quality Air Conditioning Services</h2>
+        <p>We provide reliable and efficient AC solutions for your comfort.</p>
+        <a href="#contact" class="cta-button">Get a Free Quote</a>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <h2>Our Services</h2>
+        <div class="service-list">
+            <div class="service-item" id="installation">
+                <h3>Installation</h3>
+                <p>We install residential and commercial air conditioning systems tailored to your needs.</p>
+            </div>
+            <div class="service-item" id="diagnosis">
+                <h3>Diagnosis & Troubleshooting</h3>
+                <p>Expert diagnosis and repair services to ensure your system runs smoothly.</p>
+            </div>
+            <div class="service-item" id="maintenance">
+                <h3>Preventive Maintenance</h3>
+                <p>Regular maintenance to keep your AC system in top condition and extend its lifespan.</p>
+            </div>
+            <div class="service-item" id="ductworks">
+                <h3>Duct Works</h3>
+                <p>Professional ductwork services to ensure optimal airflow and system performance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about">
+        <h2>About Us</h2>
+        <p>At iComfortmaster, we specialize in providing high-quality air conditioning services, from installation to maintenance. With years of experience, we are committed to keeping you comfortable and ensuring your AC system works efficiently.</p>
+    </section>
+
+    <!-- Image Gallery Section with Navigation -->
+<section id="gallery">
+    <h2>Our Work Gallery</h2>
+    <div class="gallery-wrapper">
+        <button class="nav-button left" onclick="scrollLeft()">&#10094;</button>
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="image1.jpg" alt="AC Installation 1">
+            </div>
+            <div class="gallery-item">
+                <img src="image2.jpg" alt="AC Maintenance 2">
+            </div>
+            <div class="gallery-item">
+                <img src="image3.jpg" alt="Duct Works 3">
+            </div>
+            <div class="gallery-item">
+                <img src="image4.jpg" alt="Duct Works 3">
+            </div>
+            <div class="gallery-item">
+                <img src="image5.jpg" alt="Duct Works 3">
+            </div>
+            <div class="gallery-item">
+                <img src="image6.jpg" alt="Duct Works 3">
+            </div>
+            <div class="gallery-item">
+                <img src="image7.jpg" alt="Duct Works 3">
+            </div>
+            <div class="gallery-item">
+                <img src="image8.jpg" alt="Duct Works 3">
+            </div>
+            <div class="gallery-item">
+                <img src="image9.jpg" alt="Duct Works 3">
+            </div>
+            <div class="gallery-item">
+                <img src="image10.jpg" alt="Duct Works 3">
+            </div>
+        </div>
+        <button class="nav-button right" onclick="scrollRight()">&#10095;</button>
+    </div>
+</section>
+
+<script>
+function scrollLeft() {
+    const galleryContainer = document.querySelector('.gallery-container');
+    console.log("Attempting to scroll left"); // Debugging log
+    galleryContainer.scrollBy({ left: -300, behavior: 'smooth' });
+}
+
+function scrollRight() {
+    const galleryContainer = document.querySelector('.gallery-container');
+    console.log("Attempting to scroll right"); // Debugging log
+    galleryContainer.scrollBy({ left: 300, behavior: 'smooth' });
+}
+</script>
+
+<!-- Modal for Image View -->
+<div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <button class="nav-button left" onclick="changeImage(-1)">&#10094;</button>
+    <img class="modal-content" id="modalImage" alt="">
+    <button class="nav-button right" onclick="changeImage(1)">&#10095;</button>
+</div>
+
+<script>
+    let currentImageIndex = 0;
+    const images = ['image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg', 'image5.jpg',
+	'image6.jpg', 'image7.jpg', 'image8.jpg', 'image9.jpg', 'image10.jpg']; // List all your image paths
+
+    function openModal(index) {
+        currentImageIndex = index; // Set the current index
+        updateModalImage();
+        const modal = document.getElementById("imageModal");
+        modal.style.display = "flex"; // Show the modal
+    }
+
+    function closeModal() {
+        const modal = document.getElementById("imageModal");
+        modal.style.display = "none"; // Hide the modal
+    }
+
+    function changeImage(direction) {
+        currentImageIndex += direction; // Update index based on direction
+        if (currentImageIndex < 0) {
+            currentImageIndex = images.length - 1; // Loop to last image
+        } else if (currentImageIndex >= images.length) {
+            currentImageIndex = 0; // Loop to first image
+        }
+        updateModalImage();
+    }
+
+    function updateModalImage() {
+        const modalImage = document.getElementById("modalImage");
+        modalImage.src = images[currentImageIndex]; // Set the source of the modal image
+    }
+</script>
+
+<div id="video-section">
+        <video id="myVideo">
+            <source src="video1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        const video = document.getElementById('myVideo');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5 // Play when 50% of the video is in view
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+            });
+        }, observerOptions);
+
+        observer.observe(video);
+    </script>
+
+
+
+
+
+    <!-- Contact Us Section -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Contact us for any AC-related inquiries or to schedule a service.</p>
+        <ul>
+            <li>Email:
+ <a href="mailto:icomfortmaster.ky@gmail.com">icomfortmaster.ky@gmail.com</a></li>
+            <li>Phone: <a href="tel:+13455266828">+1 (345) 526-6828</a></li>
+        </ul>
+        
+        <h3>Follow Us:</h3>
+<div class="follow-us">
+    <ul>
+       <p>
+            <a href="https://www.facebook.com/profile.php?id=61565616416455" target="_blank">
+                <img src="fblogo.png" alt="Facebook">
+            </a>
+        
+        
+            <a href="https://www.instagram.com/icomfortmaster/" target="_blank">
+                <img src="iglogo.png" alt="Instagram">
+            </a>
+        
+        
+            <a href="https://wa.me/13455266828" target="_blank">
+                <img src="whatsapplogo.png" alt="WhatsApp">
+            </a>
+        </p>
+    </ul>
+</div>
+
+<form id="contact-form" action="https://formspree.io/f/xovqvgnk" method="POST">
+        <fieldset>
+            <label for="full-name">Full Name</label>
+            <input type="text" name="name" id="full-name" placeholder="First and Last" required>
+            <label for="email-address">Email Address</label>
+            <input type="email" name="_replyto" id="email-address" placeholder="Your Email" required>
+            <label for="phone">Phone Number</label>
+            <input type="tel" name="phone" id="phone" placeholder="Your Phone Number" required>
+	    <label for="address">Address</label>
+            <input type="address" name="address" id="address" placeholder="Your address" required>
+            <label for="message">Message</label>
+            <textarea name="message" id="message" rows="4" placeholder="Your Message" required></textarea>
+            <input type="hidden" name="_subject" value="Contact Form Submission">
+            <button type="submit">Submit</button>
+        </fieldset>
+    </form>
+
+        <div id="form-response"></div>
+    </section>
+
+
+
+<div id="snowflake-container"></div>
+<script>
+function createSnowflake() {
+    const snowflake = document.createElement('div');
+    snowflake.classList.add('snowflake');
+    snowflake.innerHTML = '❄';
+    
+    // Randomize size, position, and animation duration
+    snowflake.style.left = Math.random() * 100 + 'vw';
+    snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+    snowflake.style.animationDuration = Math.random() * 3 + 5 + 's';
+
+    // Add snowflake to the container
+    document.getElementById('snowflake-container').appendChild(snowflake);
+
+    // Remove the snowflake after it falls out of view
+    setTimeout(() => {
+        snowflake.remove();
+    }, parseFloat(snowflake.style.animationDuration) * 1000);
+}
+
+// Generate snowflakes at intervals
+setInterval(createSnowflake, 200);
+</script>
+    <!-- Footer Section -->
+    <footer>
+        <p><marquee>&copy; 2024 iComfortmaster - All Rights Reserved</marquee></p>
+    </footer>
+
+</body>
+</html>
